@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -70,11 +71,13 @@ class _QRViewState extends State<QRView> {
 
   @override
   Widget build(BuildContext context) {
+    Size sizeOfScreen = MediaQuery.of(context).size;
+    
     return NotificationListener(
       onNotification: onNotification,
       child: SizeChangedLayoutNotifier(
         child: (widget.overlay != null)
-            ? _getPlatformQrViewWithOverlay()
+            ? _getPlatformQrViewWithOverlay(sizeOfScreen)
             : _getPlatformQrView(),
       ),
     );
@@ -97,18 +100,25 @@ class _QRViewState extends State<QRView> {
     return false;
   }
 
-  Widget _getPlatformQrViewWithOverlay() {
+  Widget _getPlatformQrViewWithOverlay(Size sizeOfScreen) {
     return Stack(
-      children: [
-        _getPlatformQrView(),
+      children: [  
+        _getPlatformQrView(), 
+        BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 4,sigmaY: 4), 
+        ), 
+        Padding(
+          padding: widget.overlayMargin,
+          child: _getPlatformQrView(),
+        ), 
         Padding(
           padding: widget.overlayMargin,
           child: Container(
             decoration: ShapeDecoration(
               shape: widget.overlay!,
             ),
-          ),
-        )
+          )
+        ), 
       ],
     );
   }

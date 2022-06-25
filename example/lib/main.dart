@@ -161,7 +161,7 @@ class _QRViewExampleState extends State<QRViewExample> {
           borderLength: 30,
           borderWidth: 10,
           cutOutSize: scanArea, 
-          imageFilter: ImageFilter.blur(sigmaX: 4, sigmaY: 4) 
+          // imageFilter: ImageFilter.blur(sigmaX: 10, sigmaY: 10, tileMode: TileMode.mirror) 
           ),
       onPermissionSet: (ctrl, p) => _onPermissionSet(context, ctrl, p),
     );

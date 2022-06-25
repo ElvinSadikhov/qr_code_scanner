@@ -88,6 +88,13 @@ class QrScannerOverlayShape extends ShapeBorder {
     final _cutOutHeight =
         cutOutHeight < height ? cutOutHeight : height - borderOffset;
 
+    // final backgroundPaint = BackdropFilter(
+    //   filter: imageFilter ?? ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+    //   child: Paint()
+    //     ..color = overlayColor
+    //     ..style = PaintingStyle.fill 
+    // );
+
     final backgroundPaint = Paint()
       ..color = overlayColor
       ..style = PaintingStyle.fill
