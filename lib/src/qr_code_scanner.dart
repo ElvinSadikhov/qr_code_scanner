@@ -106,11 +106,11 @@ class _QRViewState extends State<QRView> {
         _getPlatformQrView(), 
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 4,sigmaY: 4), 
-        ), 
-        Padding(
-          padding: widget.overlayMargin,
-          child: _getPlatformQrView(),
-        ), 
+          child: SizedBox(
+            height: sizeOfScreen.height,
+            width: sizeOfScreen.width,
+          ),
+        ),  
         Padding(
           padding: widget.overlayMargin,
           child: Container(
@@ -119,6 +119,29 @@ class _QRViewState extends State<QRView> {
             ),
           )
         ), 
+        // _getPlatformQrView(), 
+        // BackdropFilter(
+        //   filter: ImageFilter.blur(sigmaX: 4,sigmaY: 4), 
+        //   child: SizedBox(
+        //     height: sizeOfScreen.height,
+        //     width: sizeOfScreen.width,
+        //   ),
+        // ), 
+        // Center(
+        //   child: SizedBox(
+        //     height: 150,
+        //     width: 150,
+        //     child: _getPlatformQrView()
+        //     )
+        //   ), 
+        // Padding(
+        //   padding: widget.overlayMargin,
+        //   child: Container(
+        //     decoration: ShapeDecoration(
+        //       shape: widget.overlay!,
+        //     ),
+        //   )
+        // ), 
       ],
     );
   }
