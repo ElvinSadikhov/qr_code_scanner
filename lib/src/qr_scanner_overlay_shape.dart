@@ -1,10 +1,11 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 class QrScannerOverlayShape extends ShapeBorder {
   QrScannerOverlayShape({
-    this.borderColor = Colors.red,
+    this.borderColor = Colors.blue,
     this.borderWidth = 3.0,
     this.overlayColor = const Color.fromRGBO(0, 0, 0, 80),
     this.borderRadius = 0,
@@ -13,6 +14,7 @@ class QrScannerOverlayShape extends ShapeBorder {
     double? cutOutWidth,
     double? cutOutHeight,
     this.cutOutBottomOffset = 0,
+    this.imageFilter
   })  : cutOutWidth = cutOutWidth ?? cutOutSize ?? 250,
         cutOutHeight = cutOutHeight ?? cutOutSize ?? 250 {
     assert(
@@ -34,6 +36,8 @@ class QrScannerOverlayShape extends ShapeBorder {
   final double cutOutWidth;
   final double cutOutHeight;
   final double cutOutBottomOffset;
+
+  final ImageFilter? imageFilter;
 
   @override
   EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10);
@@ -86,7 +90,8 @@ class QrScannerOverlayShape extends ShapeBorder {
 
     final backgroundPaint = Paint()
       ..color = overlayColor
-      ..style = PaintingStyle.fill;
+      ..style = PaintingStyle.fill
+      ..imageFilter = imageFilter;
 
     final borderPaint = Paint()
       ..color = borderColor
@@ -121,7 +126,7 @@ class QrScannerOverlayShape extends ShapeBorder {
       // Draw top right corner
       ..drawRRect(
         RRect.fromLTRBAndCorners(
-          cutOutRect.right - _borderLength,
+          cutOutRect.right - _borderLength ,
           cutOutRect.top,
           cutOutRect.right,
           cutOutRect.top + _borderLength,
