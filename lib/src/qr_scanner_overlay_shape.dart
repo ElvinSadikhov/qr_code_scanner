@@ -1,11 +1,10 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 class QrScannerOverlayShape extends ShapeBorder {
   QrScannerOverlayShape({
-    this.borderColor = Colors.blue,
+    this.borderColor = Colors.red,
     this.borderWidth = 3.0,
     this.overlayColor = const Color.fromRGBO(0, 0, 0, 80),
     this.borderRadius = 0,
@@ -14,7 +13,6 @@ class QrScannerOverlayShape extends ShapeBorder {
     double? cutOutWidth,
     double? cutOutHeight,
     this.cutOutBottomOffset = 0,
-    this.imageFilter
   })  : cutOutWidth = cutOutWidth ?? cutOutSize ?? 250,
         cutOutHeight = cutOutHeight ?? cutOutSize ?? 250 {
     assert(
@@ -36,8 +34,6 @@ class QrScannerOverlayShape extends ShapeBorder {
   final double cutOutWidth;
   final double cutOutHeight;
   final double cutOutBottomOffset;
-
-  final ImageFilter? imageFilter;
 
   @override
   EdgeInsetsGeometry get dimensions => const EdgeInsets.all(10);
@@ -88,17 +84,9 @@ class QrScannerOverlayShape extends ShapeBorder {
     final _cutOutHeight =
         cutOutHeight < height ? cutOutHeight : height - borderOffset;
 
-    // final backgroundPaint = BackdropFilter(
-    //   filter: imageFilter ?? ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-    //   child: Paint()
-    //     ..color = overlayColor
-    //     ..style = PaintingStyle.fill 
-    // );
-
     final backgroundPaint = Paint()
       ..color = overlayColor
-      ..style = PaintingStyle.fill
-      ..imageFilter = imageFilter;
+      ..style = PaintingStyle.fill;
 
     final borderPaint = Paint()
       ..color = borderColor
@@ -122,18 +110,10 @@ class QrScannerOverlayShape extends ShapeBorder {
     );
 
     canvas
-      ..saveLayer(
-        rect,
-        backgroundPaint,
-      )
-      ..drawRect(
-        rect,
-        backgroundPaint,
-      )
       // Draw top right corner
       ..drawRRect(
         RRect.fromLTRBAndCorners(
-          cutOutRect.right - _borderLength ,
+          cutOutRect.right - _borderLength,
           cutOutRect.top,
           cutOutRect.right,
           cutOutRect.top + _borderLength,
